@@ -12,7 +12,7 @@ class ImposerSql extends Migration {
 	 */
 	public function up()
 	{
-        DB::unprepared(file_get_contents(app_path('../database/sql/main.sql')));
+        DB::unprepared(file_get_contents(app_path('../database/migrations/sql/main.sql')));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class ImposerSql extends Migration {
 	 */
 	public function down()
 	{
-        DB::unprepared(file_get_contents(app_path('../database/sql/main_down.sql')));
+        DB::unprepared(file_get_contents(app_path('../database/migrations/sql/main_down.sql')));
 	}
 
 }

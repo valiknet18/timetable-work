@@ -43,6 +43,8 @@ CREATE TABLE Event_group(
 CREATE TABLE Teachers(
     teacher_code serial,
     teacher_name name_field,
+    teacher_surname name_field,
+    teacher_last_name name_field,
     teacher_phone VARCHAR (11),
     PRIMARY KEY(teacher_code)
 );
@@ -81,6 +83,19 @@ CREATE TABLE Everymonth(
 ALTER TABLE Events ADD CONSTRAINT event_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
 ALTER TABLE Events ADD CONSTRAINT event_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
 ALTER TABLE Events ADD CONSTRAINT event_fg_key_to_auditory FOREIGN KEY (auditory_number) REFERENCES Auditories;
+
+
+ALTER TABLE Everyday ADD CONSTRAINT everyday_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
+ALTER TABLE Everyday ADD CONSTRAINT everyday_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
+ALTER TABLE Everyday ADD CONSTRAINT everyday_fg_key_to_auditory FOREIGN KEY (auditory_number) REFERENCES Auditories;
+
+ALTER TABLE Everyweek ADD CONSTRAINT everyweek_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
+ALTER TABLE Everyweek ADD CONSTRAINT everyweek_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
+ALTER TABLE Everyweek ADD CONSTRAINT everyweek_fg_key_to_auditory FOREIGN KEY (auditory_number) REFERENCES Auditories;
+
+ALTER TABLE Everymonth ADD CONSTRAINT everymonth_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
+ALTER TABLE Everymonth ADD CONSTRAINT everymonth_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
+ALTER TABLE Everymonth ADD CONSTRAINT everymonth_fg_key_to_auditory FOREIGN KEY (auditory_number) REFERENCES Auditories;
 
 ALTER TABLE Event_group ADD CONSTRAINT event_group_fg_key_to_event FOREIGN KEY (event_code) REFERENCES Events;
 ALTER TABLE Event_group ADD CONSTRAINT event_group_fg_key_to_group FOREIGN KEY (group_code) REFERENCES Groups;
