@@ -14,8 +14,14 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('SubjectTableSeeder');
-		$this->call('TeacherTableSeeder');
+        DB::statement('alter table teacher_subject disable trigger all;');
+
+        $this->call('TeacherTableSeeder');
+        $this->call('SubjectTableSeeder');
+		$this->call('GroupTableSeeder');
+		$this->call('AuditoryTableSeeder');
+
+        DB::statement('alter table teacher_subject enable trigger all;');
 
         $this->command->info('All seeds already loaded!');
 	}
