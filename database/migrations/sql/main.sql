@@ -100,5 +100,5 @@ ALTER TABLE Everymonth ADD CONSTRAINT everymonth_fg_key_to_auditory FOREIGN KEY 
 ALTER TABLE Event_group ADD CONSTRAINT event_group_fg_key_to_event FOREIGN KEY (event_code) REFERENCES Events;
 ALTER TABLE Event_group ADD CONSTRAINT event_group_fg_key_to_group FOREIGN KEY (group_code) REFERENCES Groups;
 
-ALTER TABLE Teacher_subject ADD CONSTRAINT teacher_subject_group_fg_key_to_event FOREIGN KEY (teacher_code) REFERENCES Teachers;
-ALTER TABLE Teacher_subject ADD CONSTRAINT teacher_subject_fg_key_to_group FOREIGN KEY (subject_code) REFERENCES Subjects;
+ALTER TABLE Teacher_subject ADD CONSTRAINT teacher_subject_group_fg_key_to_event FOREIGN KEY (teacher_code) REFERENCES Teachers MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE Teacher_subject ADD CONSTRAINT teacher_subject_fg_key_to_group FOREIGN KEY (subject_code) REFERENCES Subjects MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
