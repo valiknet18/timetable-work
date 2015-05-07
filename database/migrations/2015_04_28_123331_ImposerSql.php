@@ -13,6 +13,7 @@ class ImposerSql extends Migration {
 	public function up()
 	{
         DB::unprepared(file_get_contents(app_path('../database/migrations/sql/main.sql')));
+//        DB::unprepared(file_get_contents(app_path('../database/migrations/sql/store_functions.sql')));
 	}
 
 	/**

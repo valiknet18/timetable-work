@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('SubjectTableSeeder');
 		$this->call('GroupTableSeeder');
 		$this->call('AuditoryTableSeeder');
+		$this->call('EventTableSeeder');
 
         DB::statement('alter table teacher_subject enable trigger all;');
 

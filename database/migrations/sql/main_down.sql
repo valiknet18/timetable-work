@@ -1,3 +1,4 @@
+DROP TABLE Lessons;
 DROP TABLE Event_group;
 DROP TABLE Teacher_subject;
 DROP TABLE Everyday;

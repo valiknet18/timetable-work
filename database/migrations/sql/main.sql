@@ -8,8 +8,8 @@ CREATE DOMAIN domain_integer_not_null as INTEGER NOT NULL;
 
 CREATE TABLE Events(
     event_code serial,
-    event_date_start event_date_not_null,
-    event_date_end event_date_not_null,
+    event_date_start date NOT NULL,
+    event_date_end date NOT NULL,
     event_time_start event_time_not_null,
     event_time_end event_time_not_null,
 
@@ -20,11 +20,27 @@ CREATE TABLE Events(
 
     event_type SMALLINT NOT NULL,
 
+    repeat_type CHAR(15) NOT NULL DEFAULT('single'),
+
     teacher_code domain_integer_not_null,
     subject_code domain_integer_not_null,
     auditory_number domain_integer_not_null,
 
     PRIMARY KEY(event_code)
+);
+
+CREATE TABLE Lessons(
+  lesson_code serial,
+
+  event_date_start date NOT NULL,
+  event_date_end date NOT NULL,
+
+  original_event_code domain_integer_not_null,
+  teacher_code domain_integer_not_null,
+  subject_code domain_integer_not_null,
+  auditory_number domain_integer_not_null,
+
+  PRIMARY KEY(lesson_code)
 );
 
 CREATE TABLE Groups(
@@ -67,15 +83,18 @@ CREATE TABLE Auditories(
 );
 
 CREATE TABLE Everyday(
+  repeat_type CHAR(15) NOT NULL DEFAULT('everyday'),
   everyDay smallint_not_null_domain
 ) INHERITS (Events);
 
 CREATE TABLE Everyweek(
+  repeat_type CHAR(15) NOT NULL DEFAULT('everyweek'),
   everyDay BIT(7) NOT NULL,
   everyWeek smallint_not_null_domain
 ) INHERITS (Events);
 
 CREATE TABLE Everymonth(
+  repeat_type CHAR(15) NOT NULL DEFAULT('everymonth'),
   repeatedAt smallint_not_null_domain,
   everyWeek smallint_not_null_domain
 ) INHERITS (Events);
@@ -83,7 +102,6 @@ CREATE TABLE Everymonth(
 ALTER TABLE Events ADD CONSTRAINT event_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
 ALTER TABLE Events ADD CONSTRAINT event_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
 ALTER TABLE Events ADD CONSTRAINT event_fg_key_to_auditory FOREIGN KEY (auditory_number) REFERENCES Auditories;
-
 
 ALTER TABLE Everyday ADD CONSTRAINT everyday_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
 ALTER TABLE Everyday ADD CONSTRAINT everyday_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
@@ -102,3 +120,8 @@ ALTER TABLE Event_group ADD CONSTRAINT event_group_fg_key_to_group FOREIGN KEY (
 
 ALTER TABLE Teacher_subject ADD CONSTRAINT teacher_subject_group_fg_key_to_event FOREIGN KEY (teacher_code) REFERENCES Teachers MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE Teacher_subject ADD CONSTRAINT teacher_subject_fg_key_to_group FOREIGN KEY (subject_code) REFERENCES Subjects MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE Lessons ADD CONSTRAINT lessons_fg_key_to_teacher FOREIGN KEY (teacher_code) REFERENCES Teachers;
+ALTER TABLE Lessons ADD CONSTRAINT lessons_fg_key_to_subject FOREIGN KEY (subject_code) REFERENCES Subjects;
+ALTER TABLE Lessons ADD CONSTRAINT lessons_fg_key_to_auditory FOREIGN KEY (auditory_number) REFERENCES Auditories;
+ALTER TABLE Lessons ADD CONSTRAINT lessons_fg_key_to_event FOREIGN KEY (original_event_code) REFERENCES Events;
