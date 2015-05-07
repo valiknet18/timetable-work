@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupsController extends Controller {
 
@@ -15,6 +16,8 @@ class GroupsController extends Controller {
 	 */
 	public function index()
 	{
+//        $result = DB::select('SELECT * FROM get_event_by_day()');
+
 		$groups = Group::all();
 
         return view('groups.index', ['groups' => $groups]);

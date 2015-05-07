@@ -11,5 +11,8 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'EventsController@index');
 Route::get('/group', 'GroupsController@index');
+Route::get('/auditory', 'AuditoriesController@index');
+Route::get('/teacher', 'TeachersController@index');
+Route::get('/subject', 'SubjectsController@index');

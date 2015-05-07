@@ -2,12 +2,14 @@
 
 @section('content')
     <div>
-        <table>
-            <tr>
-                <td>Назва групи</td>
-                <td>Курс</td>
-                <td>Кількість людей</td>
-            </tr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Назва групи</th>
+                    <th>Курс</th>
+                    <th>Кількість людей</th>
+                </tr>
+            </thead>
 
             @foreach($groups as $group)
                 <tr>
