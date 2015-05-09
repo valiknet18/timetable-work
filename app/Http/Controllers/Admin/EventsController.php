@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Admin;
 
 use App\Group;
 use App\Http\Requests;
@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminController extends Controller {
+class EventsController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,8 +16,7 @@ class AdminController extends Controller {
 	 */
 	public function index()
 	{
-		$groups = Group::all();
-
-        return view('groups.index', ['groups' => $groups]);
+        return view('admin.events.index');
 	}
+
 }
